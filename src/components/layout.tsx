@@ -14,9 +14,9 @@ const Layout = ({ children } : {children: ReactNode}) => {
                 <Link href="/" className="btn normal-case text-xl">Psuedo Crowed</Link>
             </div>
             <div className="flex-none">
-                <button className="">
+                <Link href='/crow'>
                 <Image src={'/favico.ico'} alt="logo" width={50} height={50} className="rounded-lg"  />
-                </button>
+                </Link>
             </div>
         </div>
         {children}
