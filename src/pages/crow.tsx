@@ -175,7 +175,7 @@ const CrowEditor = ({
                                         <label className="label">
                                             {
                                                 edits?.preflight ? (
-                                                    <input className="w-full p-1 rounded-lg" onBlur={} value={item.question} />
+                                                    <input className="w-full p-1 rounded-lg" value={item.question} />
                                                 ):(
                                                     <span className="label-text">{item.question}</span>
                                                 )
