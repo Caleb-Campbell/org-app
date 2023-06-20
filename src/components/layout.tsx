@@ -2,9 +2,21 @@ import Link from "next/link"
 import { type ReactNode } from "react"
 import React from "react"
 import Image from "next/image"
+import Modal from "./Modal"
+import { signIn } from "next-auth/react"
 
 
-const Layout = ({ children } : {children: ReactNode}) => {
+const Layout = ({ needsAuth = false, session, children } : {needsAuth?: boolean, session?: any, children: ReactNode}) => {
+
+    if(needsAuth && !session) return (
+        <Modal show={true} setShow={() => {}}>
+            <div className="flex flex-col items-center justify-center">
+                <h1 className="text-3xl">You must be signed in to view this page</h1>
+                <button className="btn" onClick={() => signIn()}>Sign In</button>
+            </div>
+        </Modal>
+    )
+
 
     return (
         <main>

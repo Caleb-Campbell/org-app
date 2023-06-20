@@ -1,13 +1,17 @@
+import { useState } from "react";
 import { type NextPage } from "next";
-import { signIn, signOut, useSession } from "next-auth/react";
 import Head from "next/head";
-import Link from "next/link";
 import Layout from "~/components/layout";
 import { api } from "~/utils/api";
 import Image from "next/image"
 import { Button } from "~/components/buttons";
+import Modal from "~/components/Modal";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 const Home: NextPage = () => {
+  const [showSignInModal, setShowSignInModal] = useState<boolean>(false);
+
+  const { data: session, status } = useSession();
 
   return (
     <>
@@ -30,6 +34,8 @@ const Home: NextPage = () => {
       </div>
       </div>
        </Layout>
+       <Modal show={showSignInModal} setShow={setShowSignInModal}>
+       </Modal>
     </>
   );
 };
