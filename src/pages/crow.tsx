@@ -3,6 +3,7 @@ import React, { useState } from "react"
 import CrowEditor from "~/components/crow/CrowEditor";
 import Modal from "~/components/Modal";
 import { useSession } from "next-auth/react";
+import { api } from "~/utils/api";
 
 export type PreflightData = {
     id: string,
@@ -105,6 +106,8 @@ const Crow = () => {
         setCrows([...crows, newCrow])
     }
 
+    const crowData = api.crow.getCrows.useQuery({ userId: session?.user.id || '' })
+
     const updateAll = (id: string, crow: CrowData): void => {
         const newCrows = crows?.map((item) => {
             if(item.id === id) {
@@ -116,7 +119,7 @@ const Crow = () => {
     } 
 
     return (
-        <Layout needsAuth session={session}>
+        <Layout needsAuth session={status === 'authenticated'}>
              <div className="grid grid-cols-3 gap-64 p-32">
                 <button onClick={()=>setShowNewCrowModal(!showNewCrowModal)} className="w-9 h-9 rounded-full flex items-center justify-center absolute top-3 mx-auto left-1/2">
                     <i className={`scale-[2] transition-transform ${showNewCrowModal ? 'rotate-45' : ''}`} aria-hidden="true">+</i>
